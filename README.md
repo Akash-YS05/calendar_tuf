@@ -1,6 +1,6 @@
 # Atelier Wall Calendar
 
-A portfolio-ready interactive calendar built with Next.js, TypeScript, and Tailwind CSS. The UI is inspired by premium physical wall calendars: editorial imagery, warm paper tones, refined typography, and polished interaction details.
+An interactive calendar built with Next.js, TypeScript, and Tailwind CSS. The UI is inspired by premium physical wall calendars: editorial imagery, warm paper tones, refined typography, and polished interaction details.
 
 ## Overview
 
@@ -14,17 +14,11 @@ The app provides:
 ## Tech Decisions
 
 - **Next.js 16** with App Router for clean route structure and production-ready build tooling
-- **Client component boundary** at `components/Calendar.tsx` to support interaction and localStorage
+<!-- - **Client component boundary** at `components/Calendar.tsx` to support interaction and localStorage -->
 - **TypeScript** for type-safe development with clear interfaces
-- **Tailwind CSS v4** for utility-first styling with scalable patterns
+- **Tailwind CSS v4** for styling
 - **Framer Motion** for smooth animations and micro-interactions
 - **System font pairing** for strong hierarchy without external font fetch dependency
-
-## Tradeoffs
-
-- Notes are keyed by normalized date-range keys in localStorage (simple and fast) instead of a more flexible relational model.
-- A lightweight custom date utility set is used instead of `date-fns` to keep dependencies minimal.
-- Motion library added for premium feel despite bundle size increase.
 
 ## Feature Breakdown
 
@@ -92,27 +86,3 @@ Open `http://localhost:3000`.
 npm run lint
 npm run build
 ```
-
-## Video Demo Script (Short)
-
-1. **Intro (5s)**
-   "This is Atelier Wall Calendar, a premium interactive calendar UI inspired by physical wall calendars."
-
-2. **Range Selection (20s)**
-   "I click a start date, hover across nearby dates to preview the range, then click an end date to finalize. If I click an earlier day, the range resets logically. Clicking the same day twice creates a single-day range."
-
-3. **Notes Flow (15s)**
-   "With a selected range, I add notes in the journal panel. The note persists automatically in localStorage."
-
-4. **Responsive Pass (15s)**
-   "On desktop, the hero image and calendar form a split editorial layout. On tablet and mobile, it collapses into a vertical flow with preserved touch targets and readable spacing."
-
-5. **Design Rationale (10s)**
-   "The emerald accent palette, subtle shadows, and restrained motion were chosen to deliver a tactile, premium wall-calendar feel."
-
-## Future Improvements
-
-- Keyboard navigation for day grid (arrow keys, Enter to select)
-- Holidays/events overlay with legend filters
-- Seasonal hero image packs
-- Multi-note metadata (tags/priority) per range

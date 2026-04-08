@@ -107,11 +107,11 @@ export default function HeroImage({ heroImage, month, year }: HeroImageProps) {
           src={image.src}
           alt={image.alt}
           fill
-          className="object-cover"
+          className="object-cover scale-105 transition-transform duration-700"
           sizes="(max-width: 1024px) 100vw, 33vw"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/50 backdrop-blur-[3px]" />
         
         <div className="absolute top-8 left-8 right-8 text-center sm:text-left drop-shadow-lg pointer-events-none z-10">
           <motion.h2 
