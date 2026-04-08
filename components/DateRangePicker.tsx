@@ -87,7 +87,7 @@ export default function DateRangePicker({
           </svg>
         </motion.button>
 
-        <div className="w-28 sm:w-38 text-center">
+        <div className="w-28 sm:w-36 text-center">
           <motion.h2 
             key={`${year}-${month}`}
             initial={{ opacity: 0, y: -10 }}
@@ -114,7 +114,7 @@ export default function DateRangePicker({
       <div className="flex gap-2 sm:gap-4 items-center">
         {!dateRange.start ? (
           <motion.div
-            className="px-4 py-2 text-[10px] sm:text-xs font-extrabold uppercase tracking-widest rounded-[1rem] neo-out-sm transition-colors duration-300 opacity-80 hover:opacity-100 text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
+            className="px-4 py-2 text-[10px] sm:text-xs font-extrabold uppercase tracking-widest rounded-[0.8rem] neo-out-sm transition-colors duration-300 opacity-80 hover:opacity-100 text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
             whileHover={{ scale: 1.02 }}
             onClick={goToToday}
           >

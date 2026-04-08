@@ -24,7 +24,7 @@ export default function HolidayList({ month }: HolidayListProps) {
       </h3>
       
       {currentHolidays.length > 0 ? (
-        <div className="flex flex-col gap-3 overflow-y-auto p-4 custom-scrollbar flex-grow rounded-[1rem]">
+        <div className="flex flex-col gap-3 overflow-y-auto p-4 pt-0 custom-scrollbar flex-grow rounded-[1rem]">
           {currentHolidays.map((holiday, idx) => (
             <div 
               key={`${holiday.day}-${idx}`}
