@@ -87,7 +87,7 @@ export default function DateRangePicker({
           </svg>
         </motion.button>
 
-        <div className="w-28 sm:w-36 text-center">
+        <div className="w-28 sm:w-38 text-center">
           <motion.h2 
             key={`${year}-${month}`}
             initial={{ opacity: 0, y: -10 }}

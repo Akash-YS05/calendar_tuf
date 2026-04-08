@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useCallback, useSyncExternalStore, useEffect } from 'react';
+import { useState, useCallback, useSyncExternalStore, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { Note, DateRange } from './types';
 
 interface NotesPanelProps {
@@ -54,6 +56,26 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
   const [notes, setNotes] = useState<Record<string, Note>>(() => isHydrated ? loadNotes() : {});
   const [isEditing, setIsEditing] = useState(false);
   const [noteContent, setNoteContent] = useState('');
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const insertMarkdown = (prefix: string, suffix: string = '') => {
+    if (!textareaRef.current) return;
+    const { selectionStart, selectionEnd, value } = textareaRef.current;
+    const selectedText = value.substring(selectionStart, selectionEnd);
+    const newText = value.substring(0, selectionStart) + prefix + selectedText + suffix + value.substring(selectionEnd);
+    setNoteContent(newText);
+    
+    // Reset focus and selection
+    setTimeout(() => {
+      if (textareaRef.current) {
+        textareaRef.current.focus();
+        textareaRef.current.setSelectionRange(
+          selectionStart + prefix.length,
+          selectionStart + prefix.length + selectedText.length
+        );
+      }
+    }, 0);
+  };
 
   let currentKey = getRangeKey(dateRange);
   let currentNote = currentKey ? notes[currentKey] : null;
@@ -170,7 +192,7 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
 
   return (
     <motion.div
-      className="p-4 lg:p-5 mx-4 lg:mx-6 mb-2 neo-in-sm rounded-[1.5rem] h-full flex flex-col min-h-[220px]"
+      className="p-4 lg:p-5 mx-4 lg:mx-6 mb-2 neo-in-sm rounded-[1.5rem] h-full flex flex-col min-h-[260px]"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4, delay: 0.2, type: "spring", stiffness: 150 }}
@@ -204,17 +226,23 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
                 exit={{ opacity: 0, y: -10 }}
                 className="flex flex-col min-h-0 flex-grow"
               >
+                <div className="flex gap-2 mb-2">
+                  <button onClick={() => insertMarkdown('**', '**')} className="px-2 py-1 text-xs font-bold neo-out-sm rounded-md hover:text-[var(--color-neo-accent)]">B</button>
+                  <button onClick={() => insertMarkdown('_', '_')} className="px-2 py-1 text-xs italic font-bold neo-out-sm rounded-md hover:text-[var(--color-neo-accent)]">I</button>
+                  <button onClick={() => insertMarkdown('- ')} className="px-2 py-1 text-xs font-bold neo-out-sm rounded-md hover:text-[var(--color-neo-accent)]">• List</button>
+                </div>
                 <textarea
+                  ref={textareaRef}
                   value={noteContent}
                   onChange={(e) => setNoteContent(e.target.value)}
-                  placeholder="Capture your thoughts..."
-                  className="w-full flex-grow min-h-[60px] p-3 text-xs sm:text-sm font-medium text-[var(--foreground)] bg-[var(--background)] neo-in rounded-[1rem] resize-none focus:outline-none focus:ring-2 focus:ring-[var(--color-neo-accent)] transition-colors duration-300 placeholder-opacity-30 custom-scrollbar"
+                  placeholder="Capture your thoughts... (Markdown supported)"
+                  className="w-full flex-grow min-h-[100px] p-3 text-xs sm:text-sm font-medium text-[var(--foreground)] bg-[var(--background)] neo-in rounded-[0.6rem] resize-none focus:outline-none focus:ring-1 focus:ring-[var(--color-neo-accent)] transition-colors duration-300 placeholder-opacity-30 custom-scrollbar"
                   autoFocus
                 />
                 <div className="flex gap-2 mt-3 flex-shrink-0">
                   <motion.button
                     onClick={handleSave}
-                    className="flex-1 py-2 neo-accent-out rounded-[1rem] text-[10px] sm:text-xs font-extrabold uppercase tracking-widest cursor-pointer active:neo-accent-in"
+                    className="flex-1 py-2 neo-accent-out rounded-[0.7rem] text-[10px] sm:text-xs font-extrabold uppercase tracking-widest cursor-pointer active:neo-accent-in"
                     whileHover={{ scale: 1.02 }}
                   >
                     Save Note
@@ -222,7 +250,7 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
                   {currentNote && (
                     <motion.button
                       onClick={handleClear}
-                      className="px-3 py-2 neo-out-sm rounded-[1rem] text-[10px] sm:text-xs font-extrabold uppercase tracking-widest text-[#ef4444] opacity-80 hover:opacity-100 cursor-pointer active:neo-in-sm"
+                      className="px-3 py-2 neo-out-sm rounded-[0.7rem] text-[10px] sm:text-xs font-extrabold uppercase tracking-widest text-[#ef4444] opacity-80 hover:opacity-100 cursor-pointer active:neo-in-sm"
                       whileHover={{ scale: 1.05 }}
                     >
                       Clear
@@ -233,7 +261,7 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
                       setIsEditing(false);
                       setNoteContent(currentNote?.content || '');
                     }}
-                    className="px-3 py-2 neo-out-sm rounded-[1rem] text-[10px] sm:text-xs font-extrabold uppercase tracking-widest opacity-60 hover:opacity-100 cursor-pointer active:neo-in-sm"
+                    className="px-3 py-2 neo-out-sm rounded-[0.7rem] text-[10px] sm:text-xs font-extrabold uppercase tracking-widest opacity-60 hover:opacity-100 cursor-pointer active:neo-in-sm"
                     whileHover={{ scale: 1.05 }}
                   >
                     Cancel
@@ -248,10 +276,10 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
                 className="flex flex-col min-h-0 flex-grow"
               >
                 {currentNote?.content ? (
-                  <div className="p-3 lg:p-4 neo-out-sm rounded-[1rem] flex-grow overflow-y-auto custom-scrollbar">
-                    <p className="whitespace-pre-wrap text-xs sm:text-sm font-semibold opacity-70 leading-relaxed text-[var(--foreground)]">
+                  <div className="p-3 lg:p-4 neo-out-sm rounded-[1rem] flex-grow overflow-y-auto custom-scrollbar prose prose-sm dark:prose-invert prose-p:text-xs prose-p:sm:text-sm prose-p:font-semibold prose-p:opacity-70 prose-p:leading-relaxed prose-p:text-[var(--foreground)] prose-strong:text-[var(--color-neo-accent)] prose-a:text-[var(--color-neo-accent)] prose-ul:text-xs prose-ul:opacity-70 prose-li:my-0.5">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
                       {currentNote.content}
-                    </p>
+                    </ReactMarkdown>
                   </div>
                 ) : (
                   <motion.button

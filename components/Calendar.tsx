@@ -80,8 +80,8 @@ export default function Calendar({ heroImage, initialMonth, initialYear }: Calen
   }, [handleClearSelection]);
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 bg-[var(--background)] origin-top scale-[0.8] transition-colors duration-300 relative font-sans">
-      <div className="absolute top-6 right-6 lg:top-8 lg:right-8 z-50">
+    <div className="min-h-[100dvh] w-full flex flex-col items-center justify-center p-2 sm:p-4 lg:p-8 bg-[var(--background)] lg:origin-top lg:scale-[0.8] transition-colors duration-300 relative font-sans overflow-x-hidden">
+      <div className="absolute top-2 right-2 lg:top-8 lg:right-8 z-50">
         <motion.button
           onClick={toggleTheme}
           className="w-12 h-12 flex items-center justify-center rounded-[1rem] neo-out-sm transition-colors duration-300 text-[var(--foreground)] opacity-70 hover:opacity-100 hover:text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
@@ -110,19 +110,19 @@ export default function Calendar({ heroImage, initialMonth, initialYear }: Calen
         </motion.button>
       </div>
 
-      <div className="w-full max-w-5xl flex flex-col min-h-[650px] relative">
+      <div className="w-full max-w-5xl flex flex-col min-h-[700px] relative pb-6 lg:pb-0">
         <motion.div
-          className="neo-out rounded-[2rem] overflow-hidden bg-[var(--background)] flex-grow flex flex-col mt-2 lg:mt-4"
+          className="neo-out rounded-[1.5rem] lg:rounded-[2rem] overflow-hidden bg-[var(--background)] flex-grow flex flex-col mt-14 lg:mt-4 w-full"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1, type: "spring", stiffness: 100 }}
         >
           <div className="flex flex-col lg:flex-row flex-grow">
-            <div className="lg:w-2/5 p-4 lg:pr-2 flex flex-col gap-3">
-              <div className="neo-in rounded-[1.5rem] p-2 relative group overflow-hidden" style={{ height: 'calc(100% - 240px)' }}>
+            <div className="lg:w-2/5 p-3 lg:p-4 lg:pr-2 flex flex-col gap-3">
+              <div className="neo-in rounded-[1.5rem] p-2 relative group overflow-hidden h-[180px] sm:h-[220px] lg:h-[calc(100%-240px)] flex-shrink-0">
                 <HeroImage heroImage={heroImage} month={month} year={year} />
               </div>
-              <div className="flex-grow min-h-[160px]">
+              <div className="flex-grow min-h-[140px] lg:min-h-[160px]">
                 <HolidayList month={month} />
               </div>
             </div>
@@ -148,7 +148,7 @@ export default function Calendar({ heroImage, initialMonth, initialYear }: Calen
                 />
               </div>
 
-              <div className="flex-grow min-h-[220px] mt-2">
+              <div className="flex-grow min-h-[220px] lg:min-h-[260px] mt-2 pb-2 lg:pb-0">
                 <NotesPanel dateRange={dateRange} />
               </div>
             </div>
@@ -156,7 +156,7 @@ export default function Calendar({ heroImage, initialMonth, initialYear }: Calen
         </motion.div>
 
         <motion.footer
-          className="flex-shrink-0 mt-6 text-center text-xs font-bold opacity-40 uppercase tracking-wider"
+          className="flex-shrink-0 mt-4 lg:mt-6 text-center text-[10px] lg:text-xs font-bold opacity-40 uppercase tracking-wider pb-6 lg:pb-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
