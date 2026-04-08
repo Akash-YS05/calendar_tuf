@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Outfit, Cormorant_Garamond, Great_Vibes } from 'next/font/google';
+import { Outfit, Cormorant_Garamond, Great_Vibes, Anek_Malayalam } from 'next/font/google';
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
 
 const outfit = Outfit({
@@ -23,7 +24,7 @@ const greatVibes = Great_Vibes({
 });
 
 export const metadata: Metadata = {
-  title: "Atelier Wall Calendar",
+  title: "Wall Calendar",
   description:
     "Interactive wall calendar with date range selection and locally persisted notes.",
 };
@@ -35,7 +36,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${outfit.variable} ${cormorant.variable} ${greatVibes.variable} h-full antialiased`}>
-      <body className="min-h-[100dvh] flex flex-col overflow-x-hidden">{children}</body>
+      <body className="min-h-[100dvh] flex flex-col overflow-x-hidden">
+        {children}
+        <Analytics/>  
+      </body>
     </html>
   );
 }
