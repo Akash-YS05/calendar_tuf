@@ -122,13 +122,13 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
 
   return (
     <motion.div
-      className="p-5 lg:p-6 mx-4 lg:mx-6 mb-2 neo-in-sm rounded-[1.5rem] h-full flex flex-col min-h-[270px]"
+      className="p-4 lg:p-5 mx-4 lg:mx-6 mb-2 neo-in-sm rounded-[1.5rem] h-full flex flex-col min-h-[220px]"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4, delay: 0.2, type: "spring", stiffness: 150 }}
     >
-      <div className="flex items-center justify-between mb-3 flex-shrink-0">
-        <h3 className="text-lg sm:text-xl font-extrabold tracking-tight text-[var(--foreground)] opacity-90 drop-shadow-sm">
+      <div className="flex items-center justify-between mb-2 flex-shrink-0">
+        <h3 className="text-base sm:text-lg font-extrabold tracking-tight text-[var(--foreground)] opacity-90 drop-shadow-sm">
           Journal Notes
         </h3>
         {currentNote && !isEditing && (
@@ -144,7 +144,7 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
 
       {dateRange.start ? (
         <div className="flex flex-col min-h-0 flex-grow">
-          <p className="text-xs sm:text-sm font-bold opacity-50 uppercase tracking-wider text-[var(--foreground)] mb-3 flex-shrink-0">
+          <p className="text-[10px] sm:text-xs font-bold opacity-50 uppercase tracking-wider text-[var(--foreground)] mb-2 flex-shrink-0">
             {formatDateRange()}
           </p>
 
@@ -160,13 +160,13 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
                   value={noteContent}
                   onChange={(e) => setNoteContent(e.target.value)}
                   placeholder="Capture your thoughts..."
-                  className="w-full flex-grow min-h-[100px] p-4 text-sm font-medium text-[var(--foreground)] bg-[var(--background)] neo-in rounded-[1rem] resize-none focus:outline-none focus:ring-2 focus:ring-[var(--color-neo-accent)] transition-colors duration-300 placeholder-opacity-30 custom-scrollbar"
+                  className="w-full flex-grow min-h-[60px] p-3 text-xs sm:text-sm font-medium text-[var(--foreground)] bg-[var(--background)] neo-in rounded-[1rem] resize-none focus:outline-none focus:ring-2 focus:ring-[var(--color-neo-accent)] transition-colors duration-300 placeholder-opacity-30 custom-scrollbar"
                   autoFocus
                 />
-                <div className="flex gap-3 mt-4 flex-shrink-0">
+                <div className="flex gap-2 mt-3 flex-shrink-0">
                   <motion.button
                     onClick={handleSave}
-                    className="flex-1 py-2.5 neo-accent-out rounded-[1rem] text-xs font-extrabold uppercase tracking-widest cursor-pointer active:neo-accent-in"
+                    className="flex-1 py-2 neo-accent-out rounded-[1rem] text-[10px] sm:text-xs font-extrabold uppercase tracking-widest cursor-pointer active:neo-accent-in"
                     whileHover={{ scale: 1.02 }}
                   >
                     Save Note
@@ -174,7 +174,7 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
                   {currentNote && (
                     <motion.button
                       onClick={handleClear}
-                      className="px-4 py-2.5 neo-out-sm rounded-[1rem] text-xs font-extrabold uppercase tracking-widest text-[#ef4444] opacity-80 hover:opacity-100 cursor-pointer active:neo-in-sm"
+                      className="px-3 py-2 neo-out-sm rounded-[1rem] text-[10px] sm:text-xs font-extrabold uppercase tracking-widest text-[#ef4444] opacity-80 hover:opacity-100 cursor-pointer active:neo-in-sm"
                       whileHover={{ scale: 1.05 }}
                     >
                       Clear
@@ -185,7 +185,7 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
                       setIsEditing(false);
                       setNoteContent(currentNote?.content || '');
                     }}
-                    className="px-4 py-2.5 neo-out-sm rounded-[1rem] text-xs font-extrabold uppercase tracking-widest opacity-60 hover:opacity-100 cursor-pointer active:neo-in-sm"
+                    className="px-3 py-2 neo-out-sm rounded-[1rem] text-[10px] sm:text-xs font-extrabold uppercase tracking-widest opacity-60 hover:opacity-100 cursor-pointer active:neo-in-sm"
                     whileHover={{ scale: 1.05 }}
                   >
                     Cancel
@@ -200,18 +200,18 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
                 className="flex flex-col min-h-0 flex-grow"
               >
                 {currentNote?.content ? (
-                  <div className="p-4 lg:p-5 neo-out-sm rounded-[1rem] flex-grow overflow-y-auto custom-scrollbar">
-                    <p className="whitespace-pre-wrap text-sm sm:text-base font-semibold opacity-70 leading-relaxed text-[var(--foreground)]">
+                  <div className="p-3 lg:p-4 neo-out-sm rounded-[1rem] flex-grow overflow-y-auto custom-scrollbar">
+                    <p className="whitespace-pre-wrap text-xs sm:text-sm font-semibold opacity-70 leading-relaxed text-[var(--foreground)]">
                       {currentNote.content}
                     </p>
                   </div>
                 ) : (
                   <motion.button
                     onClick={() => setIsEditing(true)}
-                    className="w-full h-full min-h-[100px] flex items-center justify-center neo-out-sm rounded-[1rem] cursor-pointer group active:neo-in-sm"
+                    className="w-full h-full min-h-[80px] flex items-center justify-center neo-out-sm rounded-[1rem] cursor-pointer group active:neo-in-sm"
                     whileHover={{ scale: 1.01 }}
                   >
-                    <p className="font-extrabold text-sm uppercase tracking-widest opacity-30 group-hover:text-[var(--color-neo-accent)] group-hover:opacity-100 transition-colors duration-300">
+                    <p className="font-extrabold text-xs uppercase tracking-widest opacity-30 group-hover:text-[var(--color-neo-accent)] group-hover:opacity-100 transition-colors duration-300">
                       Tap to start writing...
                     </p>
                   </motion.button>
@@ -222,7 +222,7 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
         </div>
       ) : (
         <div className="flex-grow flex items-center justify-center neo-out-sm rounded-[1rem]">
-          <p className="font-bold uppercase tracking-widest opacity-30 text-xs sm:text-sm">
+          <p className="font-bold uppercase tracking-widest opacity-30 text-[10px] sm:text-xs">
             Select a date to journal
           </p>
         </div>

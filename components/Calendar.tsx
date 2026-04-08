@@ -110,24 +110,24 @@ export default function Calendar({ heroImage, initialMonth, initialYear }: Calen
         </motion.button>
       </div>
 
-      <div className="w-full max-w-6xl flex flex-col min-h-[850px] relative">
+      <div className="w-full max-w-5xl flex flex-col min-h-[650px] relative">
         <motion.div
-          className="neo-out rounded-[2rem] overflow-hidden bg-[var(--background)] flex-grow flex flex-col mt-4 lg:mt-8"
+          className="neo-out rounded-[2rem] overflow-hidden bg-[var(--background)] flex-grow flex flex-col mt-2 lg:mt-4"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1, type: "spring", stiffness: 100 }}
         >
           <div className="flex flex-col lg:flex-row flex-grow">
-            <div className="lg:w-2/5 p-5 lg:pr-2.5 flex flex-col gap-4">
-              <div className="neo-in rounded-[1.5rem] p-2.5 relative group overflow-hidden" style={{ height: 'calc(100% - 290px)' }}>
+            <div className="lg:w-2/5 p-4 lg:pr-2 flex flex-col gap-3">
+              <div className="neo-in rounded-[1.5rem] p-2 relative group overflow-hidden" style={{ height: 'calc(100% - 240px)' }}>
                 <HeroImage heroImage={heroImage} month={month} year={year} />
               </div>
-              <div className="flex-grow min-h-[200px]">
+              <div className="flex-grow min-h-[160px]">
                 <HolidayList month={month} />
               </div>
             </div>
 
-            <div className="lg:w-3/5 p-3 lg:p-4 flex flex-col h-full">
+            <div className="lg:w-3/5 p-2 lg:p-3 flex flex-col h-full">
               <div className="flex-shrink-0">
                 <DateRangePicker
                   year={year}
@@ -137,7 +137,7 @@ export default function Calendar({ heroImage, initialMonth, initialYear }: Calen
                 />
               </div>
               
-              <div className="flex-shrink-0 mt-3">
+              <div className="flex-shrink-0 mt-2">
                 <CalendarGrid
                   year={year}
                   month={month}
@@ -148,7 +148,7 @@ export default function Calendar({ heroImage, initialMonth, initialYear }: Calen
                 />
               </div>
 
-              <div className="flex-grow min-h-[300px] mt-3 pt-6">
+              <div className="flex-grow min-h-[220px] mt-2">
                 <NotesPanel dateRange={dateRange} />
               </div>
             </div>

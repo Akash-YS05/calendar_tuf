@@ -11,7 +11,7 @@ interface CalendarDayProps {
 }
 
 function getStateClasses(state: DayState, isCurrentMonth: boolean, dayOfWeek: number): string {
-  const baseClasses = 'relative flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-sm sm:text-base font-bold transition-colors duration-300 cursor-pointer';
+  const baseClasses = 'relative flex items-center justify-center w-7 h-7 sm:w-9 sm:h-9 lg:w-10 lg:h-10 text-xs sm:text-sm font-bold transition-colors duration-300 cursor-pointer';
   
   if (!isCurrentMonth) {
     return `${baseClasses} rounded-[1rem] text-[var(--foreground)] opacity-20 pointer-events-none`;

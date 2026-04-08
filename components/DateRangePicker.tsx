@@ -23,6 +23,7 @@ export default function DateRangePicker({
   onMonthChange,
 }: DateRangePickerProps) {
   const [direction, setDirection] = useState(0);
+  const monthName = MONTHS[month];
 
   const goToPrevMonth = () => {
     setDirection(-1);
@@ -72,51 +73,54 @@ export default function DateRangePicker({
   };
 
   return (
-    <div className="bg-[var(--background)] p-4 lg:p-6 rounded-[1.5rem] flex items-center justify-between mx-2 mt-2">
-      <div className="flex items-center gap-4 w-full sm:w-auto">
+    <div className="bg-[var(--background)] p-3 lg:p-4 rounded-[1.5rem] flex items-center justify-between mx-2 mt-1">
+      <div className="flex gap-2 items-center">
         <motion.button
           onClick={goToPrevMonth}
-          className="w-10 h-10 flex items-center justify-center rounded-[1rem] neo-out-sm transition-colors duration-300 text-[var(--foreground)] opacity-70 hover:opacity-100 hover:text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
+          className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-[1rem] neo-out-sm transition-colors duration-300 text-[var(--foreground)] opacity-70 hover:opacity-100 hover:text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
           whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           aria-label="Previous month"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
           </svg>
         </motion.button>
 
-        <motion.div
-          key={`${year}-${month}`}
-          className="flex-1 sm:min-w-[180px] text-center"
-          initial={{ opacity: 0, x: direction * 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.3, type: "spring", stiffness: 200 }}
-        >
-          <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[var(--foreground)] opacity-90 drop-shadow-sm">
-            {MONTHS[month]} {year}
-          </h2>
-        </motion.div>
+        <div className="w-28 sm:w-36 text-center">
+          <motion.h2 
+            key={`${year}-${month}`}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-sm sm:text-base lg:text-lg font-extrabold text-[var(--foreground)] tracking-wide"
+          >
+            {monthName} {year}
+          </motion.h2>
+        </div>
 
         <motion.button
           onClick={goToNextMonth}
-          className="w-10 h-10 flex items-center justify-center rounded-[1rem] neo-out-sm transition-colors duration-300 text-[var(--foreground)] opacity-70 hover:opacity-100 hover:text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
+          className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-[1rem] neo-out-sm transition-colors duration-300 text-[var(--foreground)] opacity-70 hover:opacity-100 hover:text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
           whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           aria-label="Next month"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
           </svg>
         </motion.button>
       </div>
 
-      <div className="hidden sm:flex items-center gap-3">
-        <motion.button
-          onClick={goToToday}
-          className="px-5 py-2.5 text-xs font-extrabold uppercase tracking-widest rounded-[1rem] neo-out-sm transition-colors duration-300 opacity-80 hover:opacity-100 text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
-          whileHover={{ scale: 1.05 }}
-        >
-          Today
-        </motion.button>
+      <div className="flex gap-2 sm:gap-4 items-center">
+        {!dateRange.start ? (
+          <motion.div
+            className="px-4 py-2 text-[10px] sm:text-xs font-extrabold uppercase tracking-widest rounded-[1rem] neo-out-sm transition-colors duration-300 opacity-80 hover:opacity-100 text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
+            whileHover={{ scale: 1.02 }}
+            onClick={goToToday}
+          >
+            Today
+          </motion.div>
+        ) : null}
 
         <AnimatePresence mode="popLayout">
           {dateRange.start && (
@@ -124,14 +128,14 @@ export default function DateRangePicker({
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-[1rem] neo-in-sm"
+              className="flex items-center gap-2 px-3 py-2 rounded-[1rem] neo-in-sm"
             >
               <span className="text-xs font-bold uppercase tracking-wider opacity-80 text-[var(--color-neo-accent)]">
                 {formatSelectedRange()}
               </span>
               <motion.button
                 onClick={clearSelection}
-                className="w-6 h-6 flex items-center justify-center rounded-full neo-out-sm transition-colors ml-2 cursor-pointer active:neo-in-sm"
+                className="w-5 h-5 flex items-center justify-center rounded-full neo-out-sm transition-colors ml-1 cursor-pointer active:neo-in-sm"
                 whileHover={{ scale: 1.1 }}
                 aria-label="Clear selection"
               >

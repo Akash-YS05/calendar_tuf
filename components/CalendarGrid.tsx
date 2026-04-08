@@ -144,12 +144,12 @@ export default function CalendarGrid({
   }, [year, month]);
 
   return (
-    <div className="bg-[var(--background)] rounded-[1.5rem] px-4 lg:px-5">
-      <div className="grid grid-cols-7 gap-3 mb-3 neo-in-sm rounded-[1rem] p-3">
+    <div className="bg-[var(--background)] rounded-[1.5rem] px-3 lg:px-4">
+      <div className="grid grid-cols-7 gap-2 mb-2 neo-in-sm rounded-[1rem] p-2">
         {WEEKDAYS.map((day) => (
           <div
             key={day}
-            className="text-center text-[10px] sm:text-xs font-extrabold uppercase tracking-widest text-[var(--foreground)] opacity-40"
+            className="text-center text-[10px] font-extrabold uppercase tracking-widest text-[var(--foreground)] opacity-40"
           >
             {day}
           </div>
@@ -158,7 +158,7 @@ export default function CalendarGrid({
 
       <motion.div
         key={`${year}-${month}`}
-        className="grid grid-cols-7 gap-y-3"
+        className="grid grid-cols-7 gap-y-1 sm:gap-y-2"
         initial={{ opacity: 0, rotateX: -90 }}
         animate={{ opacity: 1, rotateX: 0 }}
         transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
