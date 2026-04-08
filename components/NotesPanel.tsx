@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useSyncExternalStore } from 'react';
+import { useState, useCallback, useSyncExternalStore, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Note, DateRange } from './types';
 
@@ -55,8 +55,45 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [noteContent, setNoteContent] = useState('');
 
-  const currentKey = getRangeKey(dateRange);
-  const currentNote = currentKey ? notes[currentKey] : null;
+  let currentKey = getRangeKey(dateRange);
+  let currentNote = currentKey ? notes[currentKey] : null;
+
+  // If a single date is selected and there's no exact match,
+  // check if this date falls within any saved multi-date range.
+  if (!currentNote && dateRange.start && (!dateRange.end || dateRange.start.getTime() === dateRange.end.getTime())) {
+    const targetTime = dateRange.start.getTime();
+    
+    // Sort keys to prioritize the most recently created notes in case of overlaps
+    const sortedEntries = Object.entries(notes).sort((a, b) => b[1].createdAt - a[1].createdAt);
+
+    for (const [key, note] of sortedEntries) {
+      if (key.includes('_to_')) {
+        const [startStr, endStr] = key.split('_to_');
+        const [sYear, sMonth, sDay] = startStr.split('-').map(Number);
+        const [eYear, eMonth, eDay] = endStr.split('-').map(Number);
+        
+        const startDate = new Date(sYear, sMonth - 1, sDay);
+        const endDate = new Date(eYear, eMonth - 1, eDay);
+        
+        if (targetTime >= startDate.getTime() && targetTime <= endDate.getTime()) {
+          currentKey = key;
+          currentNote = note;
+          break;
+        }
+      }
+    }
+  }
+
+  // Automatically cancel editing and clear local textarea when clicking to a different date
+  useEffect(() => {
+    setIsEditing(false);
+    setNoteContent('');
+  }, [currentKey]);
+
+  const startEditing = () => {
+    setNoteContent(currentNote?.content || '');
+    setIsEditing(true);
+  };
 
   const saveNote = useCallback((content: string) => {
     if (!currentKey) return;
@@ -91,6 +128,17 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
   };
 
   const formatDateRange = (): string => {
+    // If we're displaying an overarching multi-day note for a single clicked date, show the note's original range.
+    if (currentKey && currentKey.includes('_to_')) {
+      const [startStr, endStr] = currentKey.split('_to_');
+      const [sYear, sMonth, sDay] = startStr.split('-').map(Number);
+      const [eYear, eMonth, eDay] = endStr.split('-').map(Number);
+      const sDate = new Date(sYear, sMonth - 1, sDay);
+      const eDate = new Date(eYear, eMonth - 1, eDay);
+      
+      return `${sDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${eDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+    }
+
     if (!dateRange.start) return '';
     if (!dateRange.end) {
       return dateRange.start.toLocaleDateString('en-US', {
@@ -133,7 +181,7 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
         </h3>
         {currentNote && !isEditing && (
           <motion.button
-            onClick={() => setIsEditing(true)}
+            onClick={startEditing}
             className="px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-[var(--color-neo-accent)] neo-out-sm rounded-[1rem] cursor-pointer active:neo-in-sm"
             whileHover={{ scale: 1.05 }}
           >
@@ -207,7 +255,7 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
                   </div>
                 ) : (
                   <motion.button
-                    onClick={() => setIsEditing(true)}
+                    onClick={startEditing}
                     className="w-full h-full min-h-[80px] flex items-center justify-center neo-out-sm rounded-[1rem] cursor-pointer group active:neo-in-sm"
                     whileHover={{ scale: 1.01 }}
                   >

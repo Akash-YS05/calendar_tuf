@@ -80,7 +80,7 @@ export default function Calendar({ heroImage, initialMonth, initialYear }: Calen
   }, [handleClearSelection]);
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 bg-[var(--background)] transition-colors duration-300 relative font-sans">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 bg-[var(--background)] origin-top scale-[0.8] transition-colors duration-300 relative font-sans">
       <div className="absolute top-6 right-6 lg:top-8 lg:right-8 z-50">
         <motion.button
           onClick={toggleTheme}

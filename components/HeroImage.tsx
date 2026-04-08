@@ -54,6 +54,7 @@ export default function HeroImage({ heroImage, month, year }: HeroImageProps) {
           fill
           className="object-cover"
           sizes="(max-width: 1024px) 100vw, 33vw"
+          loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/40" />
         
