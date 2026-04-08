@@ -84,7 +84,7 @@ export default function Calendar({ heroImage, initialMonth, initialYear }: Calen
       <div className="absolute top-6 right-6 lg:top-8 lg:right-8 z-50">
         <motion.button
           onClick={toggleTheme}
-          className="w-12 h-12 flex items-center justify-center rounded-2xl neo-out-sm transition-colors duration-300 text-[var(--foreground)] opacity-70 hover:opacity-100 hover:text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
+          className="w-12 h-12 flex items-center justify-center rounded-[1rem] neo-out-sm transition-colors duration-300 text-[var(--foreground)] opacity-70 hover:opacity-100 hover:text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
           whileHover={{ scale: 1.05 }}
           aria-label="Toggle theme"
         >

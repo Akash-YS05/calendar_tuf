@@ -76,7 +76,7 @@ export default function DateRangePicker({
       <div className="flex items-center gap-4 w-full sm:w-auto">
         <motion.button
           onClick={goToPrevMonth}
-          className="w-10 h-10 flex items-center justify-center rounded-xl neo-out-sm transition-colors duration-300 text-[var(--foreground)] opacity-70 hover:opacity-100 hover:text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
+          className="w-10 h-10 flex items-center justify-center rounded-[1rem] neo-out-sm transition-colors duration-300 text-[var(--foreground)] opacity-70 hover:opacity-100 hover:text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
           whileHover={{ scale: 1.05 }}
           aria-label="Previous month"
         >
@@ -99,7 +99,7 @@ export default function DateRangePicker({
 
         <motion.button
           onClick={goToNextMonth}
-          className="w-10 h-10 flex items-center justify-center rounded-xl neo-out-sm transition-colors duration-300 text-[var(--foreground)] opacity-70 hover:opacity-100 hover:text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
+          className="w-10 h-10 flex items-center justify-center rounded-[1rem] neo-out-sm transition-colors duration-300 text-[var(--foreground)] opacity-70 hover:opacity-100 hover:text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
           whileHover={{ scale: 1.05 }}
           aria-label="Next month"
         >
@@ -112,7 +112,7 @@ export default function DateRangePicker({
       <div className="hidden sm:flex items-center gap-3">
         <motion.button
           onClick={goToToday}
-          className="px-5 py-2.5 text-xs font-extrabold uppercase tracking-widest rounded-xl neo-out-sm transition-colors duration-300 opacity-80 hover:opacity-100 text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
+          className="px-5 py-2.5 text-xs font-extrabold uppercase tracking-widest rounded-[1rem] neo-out-sm transition-colors duration-300 opacity-80 hover:opacity-100 text-[var(--color-neo-accent)] cursor-pointer active:neo-in-sm"
           whileHover={{ scale: 1.05 }}
         >
           Today
@@ -124,7 +124,7 @@ export default function DateRangePicker({
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl neo-in-sm"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-[1rem] neo-in-sm"
             >
               <span className="text-xs font-bold uppercase tracking-wider opacity-80 text-[var(--color-neo-accent)]">
                 {formatSelectedRange()}

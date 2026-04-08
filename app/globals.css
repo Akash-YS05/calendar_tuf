@@ -87,6 +87,35 @@ body {
     box-shadow: inset 4px 4px 8px rgba(0,0,0,0.2), inset -4px -4px 8px rgba(255,255,255,0.2);
     color: white;
   }
+
+  .neo-track-middle {
+    background: var(--background);
+    box-shadow: inset 0px 4px 6px var(--color-neo-dark), inset 0px -4px 6px var(--color-neo-light);
+    border-top: 1px solid var(--color-neo-border-in);
+    border-bottom: 1px solid var(--color-neo-border-in);
+  }
+
+  .neo-track-left {
+    background: var(--background);
+    box-shadow: inset 4px 4px 6px var(--color-neo-dark), inset 0px -4px 6px var(--color-neo-light);
+    border-top: 1px solid var(--color-neo-border-in);
+    border-bottom: 1px solid var(--color-neo-border-in);
+    border-left: 1px solid var(--color-neo-border-in);
+  }
+
+  .neo-track-right {
+    background: var(--background);
+    box-shadow: inset 0px 4px 6px var(--color-neo-dark), inset -4px -4px 6px var(--color-neo-light);
+    border-top: 1px solid var(--color-neo-border-in);
+    border-bottom: 1px solid var(--color-neo-border-in);
+    border-right: 1px solid var(--color-neo-border-in);
+  }
+
+  .neo-track-full {
+    background: var(--background);
+    box-shadow: inset 4px 4px 6px var(--color-neo-dark), inset -4px -4px 6px var(--color-neo-light);
+    border: 1px solid var(--color-neo-border-in);
+  }
 }
 
 /* Custom Scrollbar for Neomorphism */

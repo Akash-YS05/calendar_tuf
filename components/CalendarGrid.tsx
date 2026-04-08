@@ -62,19 +62,18 @@ function getDayState(
     if (isDateInRange(day.date, start, end)) return 'inRange';
   }
 
-  if (start && !end && hoverDate) {
-    if (isSameDate(day.date, start)) return 'start';
-    if (isSameDate(day.date, hoverDate)) return 'end';
-    if (
-      (hoverDate > start && isDateBetween(day.date, start, hoverDate)) ||
-      (hoverDate < start && isDateBetween(day.date, hoverDate, start))
-    ) {
-      return 'hoverRange';
-    }
-  }
+  if (start && !end) {
+    if (!hoverDate) {
+      if (isSameDate(day.date, start)) return 'start-only';
+    } else {
+      const isStartFirst = start.getTime() < hoverDate.getTime();
+      const visualStart = isStartFirst ? start : hoverDate;
+      const visualEnd = isStartFirst ? hoverDate : start;
 
-  if (start && isSameDate(day.date, start) && !end) {
-    return 'start';
+      if (isSameDate(day.date, visualStart)) return 'start';
+      if (isSameDate(day.date, visualEnd)) return 'end';
+      if (isDateBetween(day.date, visualStart, visualEnd)) return 'hoverRange';
+    }
   }
 
   return 'default';
@@ -145,8 +144,8 @@ export default function CalendarGrid({
   }, [year, month]);
 
   return (
-    <div className="bg-[var(--background)] rounded-xl px-4 lg:px-5">
-      <div className="grid grid-cols-7 gap-3 mb-3 neo-in-sm rounded-xl p-3">
+    <div className="bg-[var(--background)] rounded-[1.5rem] px-4 lg:px-5">
+      <div className="grid grid-cols-7 gap-3 mb-3 neo-in-sm rounded-[1rem] p-3">
         {WEEKDAYS.map((day) => (
           <div
             key={day}
@@ -159,7 +158,7 @@ export default function CalendarGrid({
 
       <motion.div
         key={`${year}-${month}`}
-        className="grid grid-cols-7 gap-y-3 gap-x-2 sm:gap-3"
+        className="grid grid-cols-7 gap-y-3"
         initial={{ opacity: 0, rotateX: -90 }}
         animate={{ opacity: 1, rotateX: 0 }}
         transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}

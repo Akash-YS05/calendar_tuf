@@ -28,10 +28,10 @@ export default function HolidayList({ month }: HolidayListProps) {
           {currentHolidays.map((holiday, idx) => (
             <div 
               key={`${holiday.day}-${idx}`}
-              className="flex items-center justify-between p-3 neo-out-sm rounded-xl"
+              className="flex items-center justify-between p-3 neo-out-sm rounded-[1rem]"
             >
               <div className="flex items-center gap-3">
-                <span className="flex items-center justify-center w-8 h-8 rounded-lg neo-in-sm text-sm font-bold text-[var(--color-neo-accent)]">
+                <span className="flex items-center justify-center w-8 h-8 rounded-[0.5rem] neo-in-sm text-sm font-bold text-[var(--color-neo-accent)]">
                   {holiday.day}
                 </span>
                 <span className="text-sm font-semibold opacity-80 text-[var(--foreground)]">

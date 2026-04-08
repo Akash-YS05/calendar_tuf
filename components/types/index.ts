@@ -23,7 +23,7 @@ export interface NoteData {
   [key: string]: Note;
 }
 
-export type DayState = 'default' | 'start' | 'end' | 'inRange' | 'hoverRange';
+export type DayState = 'default' | 'start' | 'end' | 'inRange' | 'hoverRange' | 'start-only';
 
 export interface HeroImage {
   src: string;

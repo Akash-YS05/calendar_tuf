@@ -134,7 +134,7 @@ export default function NotesPanel({ dateRange }: NotesPanelProps) {
         {currentNote && !isEditing && (
           <motion.button
             onClick={() => setIsEditing(true)}
-            className="px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-[var(--color-neo-accent)] neo-out-sm rounded-xl cursor-pointer active:neo-in-sm"
+            className="px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-[var(--color-neo-accent)] neo-out-sm rounded-[1rem] cursor-pointer active:neo-in-sm"
             whileHover={{ scale: 1.05 }}
           >
             Edit
