@@ -1,4 +1,4 @@
-#Wall Calendar Component
+# Wall Calendar Component
 
 An interactive calendar built with Next.js, TypeScript, and Tailwind CSS. The UI is inspired by premium physical wall calendars: editorial imagery, warm paper tones, refined typography, and polished interaction details.
 
