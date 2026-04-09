@@ -19,12 +19,12 @@ export default function HolidayList({ month }: HolidayListProps) {
       transition={{ duration: 0.6, type: "spring", bounce: 0.4 }}
       style={{ transformOrigin: "bottom", perspective: 1000 }}
     >
-      <h3 className="text-lg sm:text-xl font-extrabold tracking-tight text-[var(--foreground)] opacity-90 drop-shadow-sm mb-4">
+      <h3 className="text-lg sm:text-xl font-extrabold tracking-tight text-[var(--foreground)] opacity-90 drop-shadow-sm">
         Holidays
       </h3>
       
       {currentHolidays.length > 0 ? (
-        <div className="flex flex-col gap-3 overflow-y-auto p-4 pt-0 custom-scrollbar flex-grow rounded-[1rem]">
+        <div className="flex flex-col gap-3 overflow-y-auto p-3 custom-scrollbar flex-grow rounded-[1rem]">
           {currentHolidays.map((holiday, idx) => (
             <div 
               key={`${holiday.day}-${idx}`}

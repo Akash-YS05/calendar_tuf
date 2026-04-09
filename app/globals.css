@@ -39,11 +39,11 @@
 :root.dark {
   --background: #040D12;
   --foreground: #a4b8c2;
-  --color-neo-light: #071720;
-  --color-neo-dark: #010304;
-  --color-neo-grad-start: #040f15;
-  --color-neo-grad-end: #030b0f;
-  --color-neo-border: rgba(15, 40, 55, 0.4);
+  --color-neo-light: #0a1f2b;
+  --color-neo-dark: #000000;
+  --color-neo-grad-start: #051219;
+  --color-neo-grad-end: #030a0e;
+  --color-neo-border: rgba(255, 255, 255, 0.02);
   --color-neo-border-in: rgba(0, 0, 0, 0.5);
 
   --color-neo-accent: #9EC8B9;
