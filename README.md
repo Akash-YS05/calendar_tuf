@@ -2,6 +2,10 @@
 
 An interactive calendar built with Next.js, TypeScript, and Tailwind CSS. The UI is inspired by premium physical wall calendars: editorial imagery, warm paper tones, refined typography, and polished interaction details.
 
+<img width="3000" height="2500" alt="image" src="https://github.com/user-attachments/assets/4bef0ea2-62dd-4e00-a8f0-3eb47e39d24b" />
+
+
+
 ## Overview
 
 The app provides:
